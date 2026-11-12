@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Consulta de CEPs — Carangola MG | UEMG Sistemas de Informação</title>
+  
+  <!-- Metatags de SEO e Acessibilidade -->
+  <meta name="description" content="Landing page canônica para consulta inteligente e reativa de CEPs e logradouros do município de Carangola - MG. Projeto acadêmico do curso de Sistemas de Informação da UEMG Carangola.">
+  <meta name="keywords" content="CEP, Carangola, UEMG, Sistemas de Informação, Consulta CEP, Minas Gerais, Logradouros">
+  <meta name="author" content="Samuel Pedrosa do Carmo, Davy Gomes Souza, Gabriel da Silva Fonseca">
+  
+  <!-- Open Graph / Redes Sociais -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Consulta de CEPs — Carangola MG | UEMG Sistemas de Informação">
+  <meta property="og:description" content="Busca instantânea de CEPs e logradouros em Carangola com arquitetura Vanilla Web de alta performance.">
+  <meta property="og:image" content="./assets/hero-cidade.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/logo-si.png">
+
+  <!-- Folha de Estilos Nativa -->
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <!-- Pular para conteúdo principal (Acessibilidade) -->
+  <a href="#busca-secao" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- ==================== CABEÇALHO (HEADER) ==================== -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="header-brand">
+        <img src="./assets/logo-si.png" alt="Logotipo do curso de Sistemas de Informação UEMG Carangola" class="brand-logo" width="48" height="48">
+        <div class="brand-text">
+          <span class="brand-course">Sistemas de Informação</span>
+          <span class="brand-sub">UEMG Carangola • 2º Período</span>
+        </div>
+      </div>
+
+      <nav class="header-nav" aria-label="Navegação Institucional">
+        <a href="https://www.uemg.br/carangola" target="_blank" rel="noopener noreferrer" class="nav-link external-link" title="Acessar portal da UEMG Carangola (abre em nova aba)">
+          <span>Portal UEMG</span>
+          <svg class="icon-external" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+        <button type="button" class="btn-about-trigger" data-modal-target="modal-sobre">
+          <span>Sobre o Projeto</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== SEÇÃO HERO ==================== -->
+  <section class="hero-section" aria-label="Destaque da Cidade de Carangola">
+    <div class="hero-media-wrapper">
+      <img src="./assets/hero-cidade.jpg" alt="Vista panorâmica da cidade de Carangola, Minas Gerais" class="hero-bg-image" fetchpriority="high">
+      <div class="hero-overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span>Base de Dados Oficial • Carangola / MG</span>
+      </div>
+      <h1 class="hero-title">Localizador Inteligente de CEPs &amp; Logradouros</h1>
+      <p class="hero-description">
+        Consulte instantaneamente ruas, avenidas e praças de Carangola com autocomplete em tempo real, 100% processado no seu navegador sem dependências externas.
+      </p>
+
+      <div class="hero-stats" aria-label="Estatísticas da base">
+        <div class="stat-item">
+          <strong id="stat-total-ceps" class="stat-number">92</strong>
+          <span class="stat-label">Logradouros Catalogados</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <strong class="stat-number">Offline</strong>
+          <span class="stat-label">Execução em Memória</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item">
+          <strong class="stat-number">100%</strong>
+          <span class="stat-label">Vanilla Web</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ÁREA CENTRAL (MAIN) ==================== -->
+  <main id="busca-secao" class="main-content" role="main">
+    <section class="search-section" aria-labelledby="titulo-busca">
+      <div class="search-card">
+        <header class="search-card-header">
+          <h2 id="titulo-busca" class="section-title">Busca Interativa de Logradouros</h2>
+          <p class="section-subtitle">
+            Digite ao menos <strong>3 caracteres</strong> do nome da rua, avenida ou praça para visualizar sugestões imediatas.
+          </p>
+        </header>
+
+        <!-- Formulário de Busca Reativa -->
+        <div class="search-interactive-wrapper">
+          <div class="input-container" role="search">
+            <label for="input-busca" class="sr-only">Pesquisar logradouro de Carangola</label>
+            <div class="input-icon-wrapper" aria-hidden="true">
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            
+            <input 
+              type="text" 
+              id="input-busca" 
+              class="search-input" 
+              placeholder="Ex: Rua A, Avenida Brasil, Praça..." 
+              autocomplete="off"
+              aria-autocomplete="list"
+              aria-controls="lista-sugestoes"
+              aria-expanded="false"
+              spellcheck="false"
+            >
+
+            <button type="button" id="btn-limpar" class="btn-clear hidden" aria-label="Limpar campo de busca" title="Limpar busca">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Mensagem indicativa de limite mínimo de caracteres -->
+          <div id="busca-hint" class="search-hint" aria-live="polite">
+            <svg class="hint-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span id="hint-text">Digite pelo menos 3 caracteres para iniciar o filtro reativo.</span>
+          </div>
+
+          <!-- Menu Suspenso / Autocomplete Dropdown -->
+          <div id="dropdown-sugestoes" class="dropdown-wrapper hidden" aria-hidden="true">
+            <ul id="lista-sugestoes" class="suggestions-list" role="listbox" aria-label="Sugestões de logradouros">
+              <!-- Itens injetados dinamicamente via JS -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Feedback de Nenhum Resultado -->
+        <div id="busca-sem-resultados" class="empty-state hidden" role="status" aria-live="polite">
+          <div class="empty-state-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+          <h3 class="empty-state-title">Nenhum logradouro encontrado</h3>
+          <p class="empty-state-text">
+            Não encontramos correspondências para o termo digitado. Verifique a ortografia ou procure por palavras-chave parciais (ex: "Centro", "Brasil", "Santos").
+          </p>
+        </div>
+
+        <!-- Feedback de Carregamento (Loading) -->
+        <div id="busca-loading" class="loading-state hidden" role="status" aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <span>Carregando base de CEPs...</span>
+        </div>
+
+        <!-- ==================== CARD DE RESULTADO SELECIONADO ==================== -->
+        <div id="card-resultado" class="result-card hidden" aria-live="assertive" role="region" aria-label="Resultado detalhado do CEP">
+          <div class="result-header">
+            <div class="result-type-tag">
+              <span id="tag-tipo-logradouro" class="badge-type">Logradouro</span>
+              <span class="badge-status">Oficial ViaCEP</span>
+            </div>
+            <button type="button" id="btn-copiar-cep" class="btn-copy" aria-label="Copiar código de CEP">
+              <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="copy-btn-text">Copiar CEP</span>
+            </button>
+          </div>
+
+          <!-- Destaque Absoluto do CEP -->
+          <div class="cep-highlight-box">
+            <span class="cep-label">Código de Endereçamento Postal (CEP)</span>
+            <div class="cep-value-wrapper">
+              <span id="res-cep" class="cep-number">00000-000</span>
+              <span class="cep-location-tag">Carangola • MG</span>
+            </div>
+          </div>
+
+          <!-- Grade de Metadados do Endereço -->
+          <div class="result-grid">
+            <div class="result-item">
+              <span class="item-label">Nome do Logradouro</span>
+              <strong id="res-logradouro" class="item-value">—</strong>
+            </div>
+
+            <div class="result-item">
+              <span class="item-label">Bairro</span>
+              <strong id="res-bairro" class="item-value">—</strong>
+            </div>
+
+            <div class="result-item">
+              <span class="item-label">Município / UF</span>
+              <strong id="res-localidade" class="item-value">Carangola / MG</strong>
+            </div>
+
+            <div class="result-item">
+              <span class="item-label">Região / DDD</span>
+              <strong id="res-regiao-ddd" class="item-value">Sudeste • (32)</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== RODAPÉ (FOOTER) ==================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-identity">
+        <div class="footer-logos">
+          <img src="./assets/logo-si.png" alt="Logotipo Sistemas de Informação Carangola" class="footer-logo" width="44" height="44">
+          <a href="https://www.uemg.br/carangola" target="_blank" rel="noopener noreferrer" class="footer-logo-link" title="Visitar site oficial da UEMG Carangola (abre em nova aba)">
+            <img src="./assets/logo-uemg.png" alt="Logotipo da Universidade do Estado de Minas Gerais - Unidade Carangola" class="footer-logo logo-uemg-round" width="44" height="44">
+          </a>
+        </div>
+        <div class="footer-text">
+          <h3 class="footer-title">Universidade do Estado de Minas Gerais</h3>
+          <p class="footer-subtitle">Unidade Acadêmica de Carangola • Bacharelado em Sistemas de Informação</p>
+        </div>
+      </div>
+
+      <nav class="footer-links-nav" aria-label="Informações legais e institucionais">
+        <ul class="footer-links-list">
+          <li>
+            <button type="button" class="footer-link-btn" data-modal-target="modal-sobre">Sobre o Projeto</button>
+          </li>
+          <li>
+            <button type="button" class="footer-link-btn" data-modal-target="modal-termos">Termos de Uso</button>
+          </li>
+          <li>
+            <button type="button" class="footer-link-btn" data-modal-target="modal-privacidade">Política de Privacidade</button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="footer-bottom">
+        <p class="copyright-text">
+          &copy; 2026 UEMG Carangola — Disciplina de Programação 2. Desenvolvido para fins educacionais e didáticos.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAIS FLUTUANTES ==================== -->
+
+  <!-- 1. MODAL: SOBRE O PROJETO -->
+  <div id="modal-sobre" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-sobre-titulo">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-sobre-titulo" class="modal-title">Sobre o Projeto</h3>
+        <button type="button" class="modal-btn-close" aria-label="Fechar janela Sobre">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <section class="modal-section">
+          <h4>Finalidade Pedagógica</h4>
+          <p>
+            Esta landing page foi desenvolvida como atividade prática da disciplina de <strong>Programação 2</strong> (Desenvolvimento Web) para a turma do <strong>2º Período</strong> do curso de <strong>Bacharelado em Sistemas de Informação</strong> da <strong>Universidade do Estado de Minas Gerais (UEMG) — Unidade Acadêmica de Carangola</strong>.
+          </p>
+        </section>
+
+        <section class="modal-section">
+          <h4>Equipe de Desenvolvimento</h4>
+          <ul class="team-list">
+            <li class="team-member">
+              <span class="member-name">Samuel Pedrosa do Carmo</span>
+              <span class="member-role">Desenvolvedor Front-end</span>
+            </li>
+            <li class="team-member">
+              <span class="member-name">Davy Gomes Souza</span>
+              <span class="member-role">Desenvolvedor Front-end</span>
+            </li>
+            <li class="team-member">
+              <span class="member-name">Gabriel da Silva Fonseca</span>
+              <span class="member-role">Desenvolvedor Front-end</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="modal-section modal-ai-note">
+          <div class="ai-note-header">
+            <svg class="ai-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <h5>Nota de Transparência sobre o Uso de IA</h5>
+          </div>
+          <p>
+            Em consonância com os princípios de integridade acadêmica e transparência tecnológica, declara-se que ferramentas de Inteligência Artificial generativa <strong>foram utilizadas</strong> durante o desenvolvimento deste projeto. Foram aplicadas como suporte na depuração de expressões regulares do JavaScript, na revisão sintática do CSS3 e na automação de higienização de dados, sendo toda a arquitetura, lógica de negócios e validação final concebidas e auditadas pelos membros da equipe.
+          </p>
+        </section>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-modal-action modal-close-action">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MODAL: TERMOS DE USO -->
+  <div id="modal-termos" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-termos-titulo">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-termos-titulo" class="modal-title">Termos de Uso</h3>
+        <button type="button" class="modal-btn-close" aria-label="Fechar janela Termos de Uso">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body legal-text">
+        <ol class="legal-list">
+          <li>
+            <strong>Finalidade Acadêmica:</strong> Esta aplicação web possui finalidade exclusivamente didática e pedagógica, vinculada às atividades formativas da UEMG Unidade Carangola.
+          </li>
+          <li>
+            <strong>Natureza dos Dados:</strong> As informações de logradouros e Códigos de Endereçamento Postal (CEP) foram extraídas de bases públicas (ViaCEP) e são apresentadas em caráter meramente informativo, sem garantias de atualização cadastral em tempo real.
+          </li>
+          <li>
+            <strong>Isenção de Responsabilidade:</strong> Os autores e a instituição não se responsabilizam por eventuais divergências cadastrais perante a Empresa Brasileira de Correios e Telégrafos ou por utilizações comerciais indevidas desta plataforma.
+          </li>
+        </ol>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-modal-action modal-close-action">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MODAL: POLÍTICA DE PRIVACIDADE -->
+  <div id="modal-privacidade" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-privacidade-titulo">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-privacidade-titulo" class="modal-title">Política de Privacidade</h3>
+        <button type="button" class="modal-btn-close" aria-label="Fechar janela Política de Privacidade">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body legal-text">
+        <ol class="legal-list">
+          <li>
+            <strong>Não Coleta de Dados Pessoais:</strong> Esta landing page não coleta, não solicita, não processa e não armazena quaisquer dados de identificação pessoal, cookies de rastreamento ou dados sensíveis dos visitantes.
+          </li>
+          <li>
+            <strong>Execução Local:</strong> As consultas aos logradouros e CEPs são filtradas localmente na memória do navegador do usuário a partir de um arquivo estático (JSON), inexistindo comunicação de telemetria com servidores de rastreamento externos.
+          </li>
+          <li>
+            <strong>Conformidade:</strong> Esta aplicação segue os princípios fundamentais da Lei Geral de Proteção de Dados Pessoais (LGPD - Lei Federal nº 13.709/2018), pautando-se na minimização absoluta de dados e na transparência.
+          </li>
+        </ol>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-modal-action modal-close-action">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificação Flutuante (Toast) para Cópia do CEP -->
+  <div id="toast-notificacao" class="toast-notification hidden" role="alert" aria-live="assertive">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    <span id="toast-mensagem">CEP copiado para a área de transferência!</span>
+  </div>
+
+  <!-- Script Principal Nativo -->
+  <script src="./js/app.js"></script>
+</body>
+</html>
