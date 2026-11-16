@@ -4,272 +4,610 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Consulta de CEPs — Carangola MG | UEMG Sistemas de Informação</title>
+  <title>Localizador de CEPs e Endereços — Carangola/MG | UEMG</title>
   
   <!-- Metatags de SEO e Acessibilidade -->
-  <meta name="description" content="Landing page canônica para consulta inteligente e reativa de CEPs e logradouros do município de Carangola - MG. Projeto acadêmico do curso de Sistemas de Informação da UEMG Carangola.">
-  <meta name="keywords" content="CEP, Carangola, UEMG, Sistemas de Informação, Consulta CEP, Minas Gerais, Logradouros">
+  <meta name="description" content="Consulte CEPs, ruas, bairros e distritos de Carangola/MG de forma rápida e prática. Base de referência postal DNE, integração ViaCEP e BrasilAPI.">
+  <meta name="keywords" content="CEP, Carangola, UEMG, Sistemas de Informação, Consulta CEP, Minas Gerais, Logradouros, Lacerdina, Alvorada, Ponte Alta">
   <meta name="author" content="Samuel Pedrosa do Carmo, Davy Gomes Souza, Gabriel da Silva Fonseca">
   
-  <!-- Open Graph / Redes Sociais -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Consulta de CEPs — Carangola MG | UEMG Sistemas de Informação">
-  <meta property="og:description" content="Busca instantânea de CEPs e logradouros em Carangola com arquitetura Vanilla Web de alta performance.">
+  <meta property="og:title" content="Localizador de CEPs e Endereços — Carangola/MG">
+  <meta property="og:description" content="Consulte ruas, bairros e distritos de Carangola/MG de forma rápida e prática.">
   <meta property="og:image" content="./assets/hero-cidade.jpg">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./assets/logo-si.png">
 
-  <!-- Folha de Estilos Nativa -->
+  <!-- Estilos Nativos -->
   <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-  <!-- Pular para conteúdo principal (Acessibilidade) -->
+  <!-- Acessibilidade: Pular para conteúdo principal -->
   <a href="#busca-secao" class="skip-link">Pular para o conteúdo principal</a>
 
-  <!-- ==================== CABEÇALHO (HEADER) ==================== -->
+  <!-- ==================== CABEÇALHO ==================== -->
   <header class="site-header" role="banner">
     <div class="header-container">
       <div class="header-brand">
-        <img src="./assets/logo-si.png" alt="Logotipo do curso de Sistemas de Informação UEMG Carangola" class="brand-logo" width="48" height="48">
+        <img src="./assets/logo-si.png" alt="Logotipo Sistemas de Informação UEMG Carangola" class="brand-logo" width="36" height="36">
         <div class="brand-text">
           <span class="brand-course">Sistemas de Informação</span>
           <span class="brand-sub">UEMG Carangola • 2º Período</span>
         </div>
       </div>
 
-      <nav class="header-nav" aria-label="Navegação Institucional">
+      <nav class="header-nav" aria-label="Navegação Principal">
+        <a href="#guia-postal" class="nav-link">Guia postal</a>
         <a href="https://www.uemg.br/carangola" target="_blank" rel="noopener noreferrer" class="nav-link external-link" title="Acessar portal da UEMG Carangola (abre em nova aba)">
           <span>Portal UEMG</span>
-          <svg class="icon-external" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="icon-external" aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
             <polyline points="15 3 21 3 21 9"></polyline>
             <line x1="10" y1="14" x2="21" y2="3"></line>
           </svg>
         </a>
-        <button type="button" class="btn-about-trigger" data-modal-target="modal-sobre">
-          <span>Sobre o Projeto</span>
-        </button>
+        <button type="button" class="btn-header-action" data-modal-target="modal-sobre">Sobre o projeto</button>
       </nav>
     </div>
   </header>
 
-  <!-- ==================== SEÇÃO HERO ==================== -->
-  <section class="hero-section" aria-label="Destaque da Cidade de Carangola">
-    <div class="hero-media-wrapper">
-      <img src="./assets/hero-cidade.jpg" alt="Vista panorâmica da cidade de Carangola, Minas Gerais" class="hero-bg-image" fetchpriority="high">
-      <div class="hero-overlay" aria-hidden="true"></div>
-    </div>
+  <!-- ==================== HERO ==================== -->
+  <section class="hero-section" aria-label="Apresentação do serviço postal de Carangola">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">Carangola • MG</div>
+        <h1 class="hero-title">Encontre CEPs e endereços em Carangola</h1>
+        <p class="hero-description">
+          Consulte ruas, bairros e distritos de Carangola/MG de forma rápida e prática.
+        </p>
 
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot" aria-hidden="true"></span>
-        <span>Base de Dados Oficial • Carangola / MG</span>
+        <div class="hero-indicators" aria-label="Informações da base municipal">
+          <div class="indicator-item">
+            <strong id="stat-total-ceps" class="indicator-value">113</strong>
+            <span class="indicator-label">Logradouros cadastrados</span>
+          </div>
+          <div class="indicator-divider" aria-hidden="true"></div>
+          <div class="indicator-item">
+            <strong class="indicator-value">4</strong>
+            <span class="indicator-label">Distritos e área rural</span>
+          </div>
+        </div>
       </div>
-      <h1 class="hero-title">Localizador Inteligente de CEPs &amp; Logradouros</h1>
-      <p class="hero-description">
-        Consulte instantaneamente ruas, avenidas e praças de Carangola com autocomplete em tempo real, 100% processado no seu navegador sem dependências externas.
-      </p>
 
-      <div class="hero-stats" aria-label="Estatísticas da base">
-        <div class="stat-item">
-          <strong id="stat-total-ceps" class="stat-number">92</strong>
-          <span class="stat-label">Logradouros Catalogados</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat-item">
-          <strong class="stat-number">Offline</strong>
-          <span class="stat-label">Execução em Memória</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat-item">
-          <strong class="stat-number">100%</strong>
-          <span class="stat-label">Vanilla Web</span>
-        </div>
+      <div class="hero-media">
+        <figure class="hero-figure">
+          <img src="./assets/hero-cidade.jpg" alt="Vista panorâmica da cidade de Carangola, Minas Gerais" class="hero-image" fetchpriority="high">
+          <figcaption class="hero-caption">Vista panorâmica de Carangola, MG</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- ==================== ÁREA CENTRAL (MAIN) ==================== -->
+  <!-- ==================== ÁREA PRINCIPAL DE PESQUISA ==================== -->
   <main id="busca-secao" class="main-content" role="main">
-    <section class="search-section" aria-labelledby="titulo-busca">
+    <section class="search-section" aria-labelledby="titulo-consulta">
       <div class="search-card">
         <header class="search-card-header">
-          <h2 id="titulo-busca" class="section-title">Busca Interativa de Logradouros</h2>
-          <p class="section-subtitle">
-            Digite ao menos <strong>3 caracteres</strong> do nome da rua, avenida ou praça para visualizar sugestões imediatas.
-          </p>
+          <h2 id="titulo-consulta" class="section-title">Consultar endereço ou CEP</h2>
+          <p class="section-subtitle">Pesquise pelo nome da rua ou informe um CEP para localizar um endereço.</p>
         </header>
 
-        <!-- Formulário de Busca Reativa -->
-        <div class="search-interactive-wrapper">
-          <div class="input-container" role="search">
-            <label for="input-busca" class="sr-only">Pesquisar logradouro de Carangola</label>
-            <div class="input-icon-wrapper" aria-hidden="true">
-              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </div>
-            
-            <input 
-              type="text" 
-              id="input-busca" 
-              class="search-input" 
-              placeholder="Ex: Rua A, Avenida Brasil, Praça..." 
-              autocomplete="off"
-              aria-autocomplete="list"
-              aria-controls="lista-sugestoes"
-              aria-expanded="false"
-              spellcheck="false"
-            >
-
-            <button type="button" id="btn-limpar" class="btn-clear hidden" aria-label="Limpar campo de busca" title="Limpar busca">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-
-          <!-- Mensagem indicativa de limite mínimo de caracteres -->
-          <div id="busca-hint" class="search-hint" aria-live="polite">
-            <svg class="hint-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        <!-- SELETOR DE MODALIDADE -->
+        <div class="search-tabs" role="tablist" aria-label="Modalidade de consulta">
+          <button 
+            type="button" 
+            id="tab-btn-rua" 
+            class="search-tab active" 
+            role="tab" 
+            aria-selected="true" 
+            aria-controls="panel-busca-rua"
+            tabindex="0"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
             </svg>
-            <span id="hint-text">Digite pelo menos 3 caracteres para iniciar o filtro reativo.</span>
-          </div>
+            <span>Buscar endereço</span>
+          </button>
 
-          <!-- Menu Suspenso / Autocomplete Dropdown -->
-          <div id="dropdown-sugestoes" class="dropdown-wrapper hidden" aria-hidden="true">
-            <ul id="lista-sugestoes" class="suggestions-list" role="listbox" aria-label="Sugestões de logradouros">
-              <!-- Itens injetados dinamicamente via JS -->
-            </ul>
+          <button 
+            type="button" 
+            id="tab-btn-cep" 
+            class="search-tab" 
+            role="tab" 
+            aria-selected="false" 
+            aria-controls="panel-busca-cep"
+            tabindex="-1"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <line x1="6" y1="8" x2="6.01" y2="8"></line>
+              <line x1="10" y1="8" x2="10.01" y2="8"></line>
+              <line x1="14" y1="8" x2="14.01" y2="8"></line>
+              <line x1="18" y1="8" x2="18.01" y2="8"></line>
+              <line x1="6" y1="12" x2="6.01" y2="12"></line>
+              <line x1="10" y1="12" x2="10.01" y2="12"></line>
+              <line x1="14" y1="12" x2="14.01" y2="12"></line>
+              <line x1="18" y1="12" x2="18.01" y2="12"></line>
+              <line x1="6" y1="16" x2="18" y2="16"></line>
+            </svg>
+            <span>Consultar CEP</span>
+          </button>
+        </div>
+
+        <!-- EXEMPLOS RÁPIDOS (MÁXIMO 4 ÚTEIS) -->
+        <div class="quick-examples" aria-label="Exemplos rápidos de consulta">
+          <span class="examples-label">Exemplos rápidos:</span>
+          <div class="examples-list">
+            <button type="button" class="quick-chip" data-search-type="rua" data-search-val="Avenida Pico da Bandeira">Avenida Pico da Bandeira</button>
+            <button type="button" class="quick-chip" data-search-type="rua" data-search-val="Rua Santos Dumont">Rua Santos Dumont</button>
+            <button type="button" class="quick-chip" data-search-type="rua" data-search-val="Lacerdina">Lacerdina</button>
+            <button type="button" class="quick-chip" data-search-type="cep" data-search-val="36807-000">Alvorada</button>
           </div>
         </div>
 
-        <!-- Feedback de Nenhum Resultado -->
-        <div id="busca-sem-resultados" class="empty-state hidden" role="status" aria-live="polite">
-          <div class="empty-state-icon" aria-hidden="true">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- ==================== MODO 1: BUSCA POR ENDEREÇO ==================== -->
+        <div id="panel-busca-rua" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-rua">
+          <div class="search-input-wrapper">
+            <div class="input-container" role="search">
+              <label for="input-busca-rua" class="sr-only">Nome da rua ou localidade</label>
+              <div class="input-icon-slot" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </div>
+              
+              <input 
+                type="text" 
+                id="input-busca-rua" 
+                class="search-field" 
+                placeholder="Ex: Pico da Bandeira, Santos Dumont, Centro..." 
+                autocomplete="off"
+                aria-autocomplete="list"
+                aria-controls="lista-sugestoes"
+                aria-expanded="false"
+                spellcheck="false"
+              >
+
+              <button type="button" id="btn-limpar-rua" class="btn-clear hidden" aria-label="Limpar campo de pesquisa" title="Limpar">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+
+            <div id="busca-rua-hint" class="input-hint" aria-live="polite">
+              <span id="hint-rua-text">Digite o nome da rua ou localidade.</span>
+            </div>
+
+            <!-- Menu de Sugestões -->
+            <div id="dropdown-sugestoes" class="dropdown-panel hidden" aria-hidden="true">
+              <ul id="lista-sugestoes" class="suggestions-list" role="listbox" aria-label="Sugestões de endereços">
+                <!-- Injetado dinamicamente via JS -->
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== MODO 2: BUSCA POR CEP ==================== -->
+        <div id="panel-busca-cep" class="tab-panel hidden" role="tabpanel" aria-labelledby="tab-btn-cep">
+          <div class="search-input-wrapper">
+            <form id="form-busca-cep" class="cep-form-layout" onsubmit="return false;">
+              <div class="input-container input-cep-container" role="search">
+                <label for="input-busca-cep" class="sr-only">Digite o CEP com 8 dígitos</label>
+                <div class="input-icon-slot" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                
+                <input 
+                  type="text" 
+                  id="input-busca-cep" 
+                  class="search-field cep-mask-field" 
+                  placeholder="36800-001" 
+                  maxlength="9"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  spellcheck="false"
+                >
+
+                <button type="button" id="btn-limpar-cep" class="btn-clear hidden" aria-label="Limpar campo de CEP" title="Limpar">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+
+              <button type="submit" id="btn-consultar-cep" class="btn-submit-cep">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Consultar</span>
+              </button>
+            </form>
+
+            <div id="busca-cep-hint" class="input-hint" aria-live="polite">
+              <span id="hint-cep-text">Digite os 8 dígitos do CEP.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== FEEDBACKS ==================== -->
+
+        <!-- Carregamento -->
+        <div id="busca-loading" class="state-panel loading-panel hidden" role="status" aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <span id="loading-title" class="state-message">Consultando base postal...</span>
+          <span id="loading-sub" class="sr-only">Carregando dados</span>
+        </div>
+
+        <!-- Alerta de CEP Legado (36800-000) -->
+        <div id="alerta-cep-legado" class="legacy-notice hidden" role="alert" aria-live="assertive">
+          <div class="legacy-notice-content">
+            <div class="legacy-badge-row">
+              <span id="legacy-alert-tag" class="notice-tag">Código descontinuado</span>
+            </div>
+            <h3 id="legacy-alert-title" class="notice-title">CEP 36800-000 descontinuado</h3>
+            <p id="legacy-alert-desc" class="notice-text">
+              Carangola agora possui CEP individual por rua. Digite o nome da sua rua para encontrar o código atualizado.
+            </p>
+            <div class="notice-actions">
+              <button type="button" id="btn-redirecionar-legado" class="btn-notice-action">
+                <span id="btn-legacy-text">Buscar endereço</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nenhum Resultado -->
+        <div id="busca-sem-resultados" class="state-panel empty-panel hidden" role="status" aria-live="polite">
+          <div class="empty-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               <line x1="8" y1="11" x2="14" y2="11"></line>
             </svg>
           </div>
-          <h3 class="empty-state-title">Nenhum logradouro encontrado</h3>
-          <p class="empty-state-text">
-            Não encontramos correspondências para o termo digitado. Verifique a ortografia ou procure por palavras-chave parciais (ex: "Centro", "Brasil", "Santos").
-          </p>
+          <h3 id="empty-title" class="empty-title">Nenhum resultado encontrado</h3>
+          <p id="empty-desc" class="empty-desc">Verifique a ortografia ou consulte pelo nome no Guia Postal abaixo.</p>
         </div>
 
-        <!-- Feedback de Carregamento (Loading) -->
-        <div id="busca-loading" class="loading-state hidden" role="status" aria-live="polite">
-          <div class="spinner" aria-hidden="true"></div>
-          <span>Carregando base de CEPs...</span>
-        </div>
-
-        <!-- ==================== CARD DE RESULTADO SELECIONADO ==================== -->
-        <div id="card-resultado" class="result-card hidden" aria-live="assertive" role="region" aria-label="Resultado detalhado do CEP">
-          <div class="result-header">
-            <div class="result-type-tag">
-              <span id="tag-tipo-logradouro" class="badge-type">Logradouro</span>
-              <span class="badge-status">Oficial ViaCEP</span>
+        <!-- ==================== RESULTADO DA CONSULTA ==================== -->
+        <div id="card-resultado" class="result-container hidden" aria-live="assertive" role="region" aria-label="Resultado da consulta">
+          
+          <!-- Elemento Principal: CEP em Destaque -->
+          <div class="cep-display-section">
+            <div class="cep-top-meta">
+              <span class="cep-label">CEP encontrado</span>
+              <span id="tag-fonte-dados" class="source-tag">Fonte: ViaCEP</span>
             </div>
-            <button type="button" id="btn-copiar-cep" class="btn-copy" aria-label="Copiar código de CEP">
-              <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span id="copy-btn-text">Copiar CEP</span>
-            </button>
-          </div>
 
-          <!-- Destaque Absoluto do CEP -->
-          <div class="cep-highlight-box">
-            <span class="cep-label">Código de Endereçamento Postal (CEP)</span>
-            <div class="cep-value-wrapper">
+            <div class="cep-value-row">
               <span id="res-cep" class="cep-number">00000-000</span>
-              <span class="cep-location-tag">Carangola • MG</span>
+              <button type="button" id="btn-copiar-cep" class="btn-primary-copy" aria-label="Copiar código de CEP">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span id="copy-btn-text">Copiar CEP</span>
+              </button>
+            </div>
+            
+            <div id="res-jurisdicao" class="cep-location-sub">Carangola • MG</div>
+          </div>
+
+          <!-- Caso B: Aviso de CEP Único de Distrito ou Zona Rural -->
+          <div id="box-caso-distrito-rural" class="rural-notice-box hidden">
+            <div class="rural-notice-header">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span id="rural-notice-title" class="rural-notice-title">Localidade com CEP único</span>
+            </div>
+            <p id="rural-notice-desc" class="rural-notice-desc">
+              Esta localidade opera com CEP único. Informe o logradouro ou fazenda para formatar o endereço completo.
+            </p>
+            <div class="rural-input-row">
+              <label for="input-logradouro-rural" class="sr-only">Logradouro, estrada ou número</label>
+              <input 
+                type="text" 
+                id="input-logradouro-rural" 
+                class="rural-input-field" 
+                placeholder="Ex: Córrego dos Ferreiras, S/N ou Fazenda Boa Vista"
+                autocomplete="off"
+              >
             </div>
           </div>
 
-          <!-- Grade de Metadados do Endereço -->
-          <div class="result-grid">
-            <div class="result-item">
-              <span class="item-label">Nome do Logradouro</span>
-              <strong id="res-logradouro" class="item-value">—</strong>
+          <!-- Metadados em Hierarquia Estruturada -->
+          <div class="result-details">
+            <div class="detail-row">
+              <span class="detail-label">Logradouro</span>
+              <strong id="res-logradouro" class="detail-value">—</strong>
             </div>
 
-            <div class="result-item">
-              <span class="item-label">Bairro</span>
-              <strong id="res-bairro" class="item-value">—</strong>
+            <div class="detail-row">
+              <span class="detail-label">Bairro ou distrito</span>
+              <strong id="res-bairro" class="detail-value">—</strong>
             </div>
 
-            <div class="result-item">
-              <span class="item-label">Município / UF</span>
-              <strong id="res-localidade" class="item-value">Carangola / MG</strong>
+            <div class="detail-row">
+              <span class="detail-label">Município / UF</span>
+              <strong id="res-localidade" class="detail-value">Carangola / MG</strong>
             </div>
 
-            <div class="result-item">
-              <span class="item-label">Região / DDD</span>
-              <strong id="res-regiao-ddd" class="item-value">Sudeste • (32)</strong>
+            <div class="detail-row">
+              <span class="detail-label">Código IBGE</span>
+              <span id="res-ibge" class="detail-value-secondary">3113305</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-label">DDD</span>
+              <span id="res-regiao-ddd" class="detail-value-secondary">32</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="detail-label">Classificação postal</span>
+              <span id="res-status-postal" class="detail-value-secondary">CEP individual por logradouro</span>
             </div>
           </div>
+
+          <!-- Ações do Resultado -->
+          <div class="result-actions">
+            <button type="button" id="btn-copiar-endereco-completo" class="btn-secondary-action">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span>Copiar endereço</span>
+            </button>
+
+            <a id="btn-abrir-mapa" href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary-action" title="Abrir localização no Google Maps (nova aba)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                <line x1="8" y1="2" x2="8" y2="18"></line>
+                <line x1="16" y1="6" x2="16" y2="22"></line>
+              </svg>
+              <span>Ver no mapa</span>
+            </a>
+          </div>
+
         </div>
+      </div>
+    </section>
+
+    <!-- ==================== GUIA POSTAL ==================== -->
+    <section id="guia-postal" class="postal-guide-section" aria-labelledby="titulo-guia">
+      <header class="guide-header">
+        <h2 id="titulo-guia" class="guide-title">Guia postal de Carangola</h2>
+        <p class="guide-subtitle">Consulte as faixas de CEP, distritos e localidades do município.</p>
+      </header>
+
+      <div class="guide-content-grid">
+        <!-- 1. Sede Urbana -->
+        <article class="guide-block">
+          <h3 class="block-title">Sede urbana</h3>
+          <p class="block-desc">Codificação individualizada por rua.</p>
+          <ul class="range-list">
+            <li class="range-item">
+              <span class="range-code">36800-001 a 36800-899</span>
+              <span class="range-desc">Centro, Caixa D'Água, Santa Emília</span>
+            </li>
+            <li class="range-item">
+              <span class="range-code">36801-001 a 36801-899</span>
+              <span class="range-desc">Santo Onofre, Santa Maria, Aeroporto, Amendoeira</span>
+            </li>
+            <li class="range-item">
+              <span class="range-code">36802-001 a 36802-899</span>
+              <span class="range-desc">Coroado, Eldorado, Panorama, Ouro Verde</span>
+            </li>
+            <li class="range-item">
+              <span class="range-code">36803-001 a 36803-899</span>
+              <span class="range-desc">Triângulo, Chevrand, Floresta, Novos Tempos</span>
+            </li>
+            <li class="range-item">
+              <span class="range-code">36804-001 a 36804-899</span>
+              <span class="range-desc">Expansão urbana e áreas complementares</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- 2. Distritos e Zona Rural -->
+        <article class="guide-block">
+          <h3 class="block-title">Distritos e zona rural</h3>
+          <p class="block-desc">Localidades e área rural do município.</p>
+          
+          <div class="table-responsive-wrapper">
+            <table class="districts-table">
+              <thead>
+                <tr>
+                  <th scope="col" class="th-local">Localidade</th>
+                  <th scope="col" class="th-cep">CEP</th>
+                  <th scope="col" class="th-tipo">Tipo</th>
+                  <th scope="col" class="th-acao">Ação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-local">Lacerdina</td>
+                  <td class="td-cep">36805-001 a 899</td>
+                  <td class="td-tipo">Por logradouro</td>
+                  <td class="td-acao">
+                    <button type="button" class="btn-table-query" data-search-type="rua" data-search-val="Lacerdina">Consultar</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td-local">Área Rural de Carangola</td>
+                  <td class="td-cep">36806-899</td>
+                  <td class="td-tipo">CEP único</td>
+                  <td class="td-acao">
+                    <button type="button" class="btn-table-query" data-search-type="cep" data-search-val="36806-899">Consultar</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td-local">Distrito de Alvorada</td>
+                  <td class="td-cep">36807-000</td>
+                  <td class="td-tipo">CEP único</td>
+                  <td class="td-acao">
+                    <button type="button" class="btn-table-query" data-search-type="cep" data-search-val="36807-000">Consultar</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td-local">Ponte Alta de Minas</td>
+                  <td class="td-cep">36808-000</td>
+                  <td class="td-tipo">CEP único</td>
+                  <td class="td-acao">
+                    <button type="button" class="btn-table-query" data-search-type="cep" data-search-val="36808-000">Consultar</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td-local">São Manoel do Boi</td>
+                  <td class="td-cep">36809-000</td>
+                  <td class="td-tipo">CEP único</td>
+                  <td class="td-acao">
+                    <button type="button" class="btn-table-query" data-search-type="cep" data-search-val="36809-000">Consultar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- 3. Unidades dos Correios -->
+        <article class="guide-block">
+          <h3 class="block-title">Unidades dos Correios</h3>
+          <p class="block-desc">Agências e unidades operacionais em Carangola.</p>
+          <ul class="units-list">
+            <li class="unit-card">
+              <div class="unit-main">
+                <span class="unit-name">AC Carangola (Agência Central)</span>
+                <span class="unit-addr">Praça Coronel Maximiano, 36 — Centro</span>
+              </div>
+              <button type="button" class="unit-cep-btn btn-table-query" data-search-type="cep" data-search-val="36800-970">36800-970</button>
+            </li>
+            <li class="unit-card">
+              <div class="unit-main">
+                <span class="unit-name">UD Carangola (Distribuição)</span>
+                <span class="unit-addr">Praça Coronel Maximiano, 36 — Centro</span>
+              </div>
+              <button type="button" class="unit-cep-btn btn-table-query" data-search-type="cep" data-search-val="36800-973">36800-973</button>
+            </li>
+            <li class="unit-card">
+              <div class="unit-main">
+                <span class="unit-name">Clique e Retire AC Carangola</span>
+                <span class="unit-addr">Praça Coronel Maximiano, 36 — Centro</span>
+              </div>
+              <button type="button" class="unit-cep-btn btn-table-query" data-search-type="cep" data-search-val="36800-959">36800-959</button>
+            </li>
+            <li class="unit-card">
+              <div class="unit-main">
+                <span class="unit-name">AGC Lacerdina</span>
+                <span class="unit-addr">Rua Josina Fraga Lacerda, 200 — Lacerdina</span>
+              </div>
+              <button type="button" class="unit-cep-btn btn-table-query" data-search-type="cep" data-search-val="36805-970">36805-970</button>
+            </li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- 4. Histórico de CEPs Anteriores (Acordeão Expansível Discreto) -->
+      <div class="history-accordion-wrapper">
+        <details class="history-details">
+          <summary class="history-summary">
+            <span class="summary-text">Histórico de CEPs anteriores</span>
+            <svg class="summary-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </summary>
+          <div class="history-content">
+            <p class="history-note">Códigos substituídos na codificação oficial por logradouro:</p>
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th scope="col">CEP anterior</th>
+                  <th scope="col">Codificação atual</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="hist-old">36800-000</td>
+                  <td class="hist-new">Individual por rua na sede urbana</td>
+                </tr>
+                <tr>
+                  <td class="hist-old">36802-000</td>
+                  <td class="hist-new">Lacerdina (faixa 36805-001 a 36805-899)</td>
+                </tr>
+                <tr>
+                  <td class="hist-old">36803-000</td>
+                  <td class="hist-new">Distrito de Alvorada (36807-000)</td>
+                </tr>
+                <tr>
+                  <td class="hist-old">36805-000</td>
+                  <td class="hist-new">Distrito de Ponte Alta de Minas (36808-000)</td>
+                </tr>
+                <tr>
+                  <td class="hist-old">36804-000</td>
+                  <td class="hist-new">Comunidade São Manoel do Boi (36809-000)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
       </div>
     </section>
   </main>
 
-  <!-- ==================== RODAPÉ (FOOTER) ==================== -->
+  <!-- ==================== RODAPÉ ==================== -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-identity">
         <div class="footer-logos">
-          <img src="./assets/logo-si.png" alt="Logotipo Sistemas de Informação Carangola" class="footer-logo" width="44" height="44">
-          <a href="https://www.uemg.br/carangola" target="_blank" rel="noopener noreferrer" class="footer-logo-link" title="Visitar site oficial da UEMG Carangola (abre em nova aba)">
-            <img src="./assets/logo-uemg.png" alt="Logotipo da Universidade do Estado de Minas Gerais - Unidade Carangola" class="footer-logo logo-uemg-round" width="44" height="44">
+          <img src="./assets/logo-si.png" alt="Sistemas de Informação UEMG" class="footer-logo" width="36" height="36">
+          <a href="https://www.uemg.br/carangola" target="_blank" rel="noopener noreferrer" class="footer-logo-link" title="Portal da UEMG Carangola (abre em nova aba)">
+            <img src="./assets/logo-uemg.png" alt="Logotipo da UEMG Carangola" class="footer-logo logo-round" width="36" height="36">
           </a>
         </div>
-        <div class="footer-text">
-          <h3 class="footer-title">Universidade do Estado de Minas Gerais</h3>
-          <p class="footer-subtitle">Unidade Acadêmica de Carangola • Bacharelado em Sistemas de Informação</p>
+        <div class="footer-info">
+          <span class="footer-title">Universidade do Estado de Minas Gerais</span>
+          <span class="footer-sub">Unidade Acadêmica de Carangola • Bacharelado em Sistemas de Informação</span>
         </div>
       </div>
 
-      <nav class="footer-links-nav" aria-label="Informações legais e institucionais">
-        <ul class="footer-links-list">
-          <li>
-            <button type="button" class="footer-link-btn" data-modal-target="modal-sobre">Sobre o Projeto</button>
-          </li>
-          <li>
-            <button type="button" class="footer-link-btn" data-modal-target="modal-termos">Termos de Uso</button>
-          </li>
-          <li>
-            <button type="button" class="footer-link-btn" data-modal-target="modal-privacidade">Política de Privacidade</button>
-          </li>
+      <nav class="footer-nav" aria-label="Informações legais e institucionais">
+        <ul class="footer-nav-list">
+          <li><a href="#guia-postal" class="footer-nav-link">Guia postal</a></li>
+          <li><button type="button" class="footer-nav-link" data-modal-target="modal-sobre">Sobre o projeto</button></li>
+          <li><button type="button" class="footer-nav-link" data-modal-target="modal-termos">Termos de uso</button></li>
+          <li><button type="button" class="footer-nav-link" data-modal-target="modal-privacidade">Privacidade</button></li>
         </ul>
       </nav>
 
       <div class="footer-bottom">
         <p class="copyright-text">
-          &copy; 2026 UEMG Carangola — Disciplina de Programação 2. Desenvolvido para fins educacionais e didáticos.
+          &copy; 2026 UEMG Carangola — Disciplina de Programação 2. Fontes de dados: DNE/Correios, ViaCEP e BrasilAPI.
         </p>
       </div>
     </div>
   </footer>
 
-  <!-- ==================== MODAIS FLUTUANTES ==================== -->
+  <!-- ==================== MODAIS ==================== -->
 
-  <!-- 1. MODAL: SOBRE O PROJETO -->
+  <!-- Modal: Sobre o Projeto -->
   <div id="modal-sobre" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-sobre-titulo">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="modal-sobre-titulo" class="modal-title">Sobre o Projeto</h3>
+        <h3 id="modal-sobre-titulo" class="modal-title">Sobre o projeto</h3>
         <button type="button" class="modal-btn-close" aria-label="Fechar janela Sobre">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -278,39 +616,42 @@
 
       <div class="modal-body">
         <section class="modal-section">
-          <h4>Finalidade Pedagógica</h4>
+          <h4>Finalidade pedagógica</h4>
           <p>
             Esta landing page foi desenvolvida como atividade prática da disciplina de <strong>Programação 2</strong> (Desenvolvimento Web) para a turma do <strong>2º Período</strong> do curso de <strong>Bacharelado em Sistemas de Informação</strong> da <strong>Universidade do Estado de Minas Gerais (UEMG) — Unidade Acadêmica de Carangola</strong>.
+          </p>
+          <p>
+            O objetivo é fornecer uma ferramenta de consulta postal funcional e acessível para a comunidade de Carangola-MG, integrando serviços de busca de CEPs, tratamento de distritos e diretrizes DNE dos Correios.
           </p>
         </section>
 
         <section class="modal-section">
-          <h4>Equipe de Desenvolvimento</h4>
+          <h4>Equipe de desenvolvimento</h4>
           <ul class="team-list">
             <li class="team-member">
               <span class="member-name">Samuel Pedrosa do Carmo</span>
-              <span class="member-role">Desenvolvedor Front-end</span>
+              <span class="member-role">Desenvolvimento Front-end</span>
             </li>
             <li class="team-member">
               <span class="member-name">Davy Gomes Souza</span>
-              <span class="member-role">Desenvolvedor Front-end</span>
+              <span class="member-role">Desenvolvimento Front-end</span>
             </li>
             <li class="team-member">
               <span class="member-name">Gabriel da Silva Fonseca</span>
-              <span class="member-role">Desenvolvedor Front-end</span>
+              <span class="member-role">Desenvolvimento Front-end</span>
             </li>
           </ul>
         </section>
 
         <section class="modal-section modal-ai-note">
           <div class="ai-note-header">
-            <svg class="ai-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
             </svg>
-            <h5>Nota de Transparência sobre o Uso de IA</h5>
+            <h5>Nota de transparência sobre o uso de IA</h5>
           </div>
           <p>
-            Em consonância com os princípios de integridade acadêmica e transparência tecnológica, declara-se que ferramentas de Inteligência Artificial generativa <strong>foram utilizadas</strong> durante o desenvolvimento deste projeto. Foram aplicadas como suporte na depuração de expressões regulares do JavaScript, na revisão sintática do CSS3 e na automação de higienização de dados, sendo toda a arquitetura, lógica de negócios e validação final concebidas e auditadas pelos membros da equipe.
+            Ferramentas de Inteligência Artificial generativa foram utilizadas durante o desenvolvimento como suporte na depuração de código, revisão sintática e estruturação semântica, sendo a concepção, regras de negócio e validação auditadas pela equipe.
           </p>
         </section>
       </div>
@@ -321,13 +662,13 @@
     </div>
   </div>
 
-  <!-- 2. MODAL: TERMOS DE USO -->
+  <!-- Modal: Termos de Uso -->
   <div id="modal-termos" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-termos-titulo">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="modal-termos-titulo" class="modal-title">Termos de Uso</h3>
+        <h3 id="modal-termos-titulo" class="modal-title">Termos de uso</h3>
         <button type="button" class="modal-btn-close" aria-label="Fechar janela Termos de Uso">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -336,15 +677,9 @@
 
       <div class="modal-body legal-text">
         <ol class="legal-list">
-          <li>
-            <strong>Finalidade Acadêmica:</strong> Esta aplicação web possui finalidade exclusivamente didática e pedagógica, vinculada às atividades formativas da UEMG Unidade Carangola.
-          </li>
-          <li>
-            <strong>Natureza dos Dados:</strong> As informações de logradouros e Códigos de Endereçamento Postal (CEP) foram extraídas de bases públicas (ViaCEP) e são apresentadas em caráter meramente informativo, sem garantias de atualização cadastral em tempo real.
-          </li>
-          <li>
-            <strong>Isenção de Responsabilidade:</strong> Os autores e a instituição não se responsabilizam por eventuais divergências cadastrais perante a Empresa Brasileira de Correios e Telégrafos ou por utilizações comerciais indevidas desta plataforma.
-          </li>
+          <li><strong>Finalidade acadêmica:</strong> Aplicação didática vinculada às atividades formativas da UEMG Carangola.</li>
+          <li><strong>Natureza dos dados:</strong> Informações extraídas de serviços públicos (ViaCEP, BrasilAPI e DNE) em caráter meramente informativo.</li>
+          <li><strong>Isenção:</strong> A instituição e os desenvolvedores não respondem por eventuais divergências perante os Correios.</li>
         </ol>
       </div>
 
@@ -354,13 +689,13 @@
     </div>
   </div>
 
-  <!-- 3. MODAL: POLÍTICA DE PRIVACIDADE -->
+  <!-- Modal: Política de Privacidade -->
   <div id="modal-privacidade" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-privacidade-titulo">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 id="modal-privacidade-titulo" class="modal-title">Política de Privacidade</h3>
-        <button type="button" class="modal-btn-close" aria-label="Fechar janela Política de Privacidade">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <h3 id="modal-privacidade-titulo" class="modal-title">Política de privacidade</h3>
+        <button type="button" class="modal-btn-close" aria-label="Fechar janela Privacidade">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -369,15 +704,8 @@
 
       <div class="modal-body legal-text">
         <ol class="legal-list">
-          <li>
-            <strong>Não Coleta de Dados Pessoais:</strong> Esta landing page não coleta, não solicita, não processa e não armazena quaisquer dados de identificação pessoal, cookies de rastreamento ou dados sensíveis dos visitantes.
-          </li>
-          <li>
-            <strong>Execução Local:</strong> As consultas aos logradouros e CEPs são filtradas localmente na memória do navegador do usuário a partir de um arquivo estático (JSON), inexistindo comunicação de telemetria com servidores de rastreamento externos.
-          </li>
-          <li>
-            <strong>Conformidade:</strong> Esta aplicação segue os princípios fundamentais da Lei Geral de Proteção de Dados Pessoais (LGPD - Lei Federal nº 13.709/2018), pautando-se na minimização absoluta de dados e na transparência.
-          </li>
+          <li><strong>Não coleta:</strong> Esta aplicação não coleta, não solicita e não armazena dados de identificação pessoal ou cookies de rastreamento.</li>
+          <li><strong>Conformidade:</strong> Desenvolvida em conformidade com as boas práticas e os princípios da LGPD (Lei nº 13.709/2018).</li>
         </ol>
       </div>
 
@@ -387,16 +715,16 @@
     </div>
   </div>
 
-  <!-- Notificação Flutuante (Toast) para Cópia do CEP -->
+  <!-- Notificação Toast -->
   <div id="toast-notificacao" class="toast-notification hidden" role="alert" aria-live="assertive">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
       <polyline points="22 4 12 14.01 9 11.01"></polyline>
     </svg>
-    <span id="toast-mensagem">CEP copiado para a área de transferência!</span>
+    <span id="toast-mensagem">CEP copiado com sucesso!</span>
   </div>
 
-  <!-- Script Principal Nativo -->
+  <!-- Script Principal -->
   <script src="./js/app.js"></script>
 </body>
 </html>
