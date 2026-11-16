@@ -1,4 +1,4 @@
-::: {align="center"}
+
 # 📍 Localizador de CEPs de Carangola
 
 **Encontre CEPs, ruas, bairros e localidades de Carangola/MG em um só
@@ -96,13 +96,6 @@ Como os dados e os serviços externos podem ser atualizados, os
 resultados devem ser entendidos como informações de consulta, e não como
 garantia de atualização cadastral em tempo real.
 
-## Acesse
-
--   **Aplicação online:** `INSIRA_AQUI_O_LINK_DA_APLICACAO`
--   **Código-fonte:** `INSIRA_AQUI_O_LINK_DO_REPOSITORIO`
-
-Caso a aplicação ainda não esteja publicada, o link de acesso poderá ser
-adicionado assim que o deploy estiver disponível.
 
 ## Sobre o desenvolvimento
 
@@ -150,9 +143,8 @@ canais oficiais de consulta postal.
 
 ------------------------------------------------------------------------
 
-::: {align="center"}
 **Projeto acadêmico --- Sistemas de Informação \| UEMG Carangola**
 
 *Uma iniciativa para tornar a consulta de endereços e CEPs de Carangola
 mais simples e acessível.*
-:::
+
